@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C'est CARRÉ² — Ressources maths gratuits collège</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* HERO */
+  .hero {
+    max-width: 720px; margin: 0 auto;
+    padding: 80px 32px 52px; text-align: center;
+    animation: fadeUp .5s ease both;
+  }
+  .hero-eyebrow {
+    display: inline-block; font-size: 11px; font-weight: 800;
+    letter-spacing: 1.8px; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 20px;
+  }
+  h1 {
+    font-family: 'Fraunces', serif; font-weight: 300;
+    font-size: clamp(36px, 6vw, 56px);
+    line-height: 1.1; letter-spacing: -1.5px;
+    color: var(--text); margin-bottom: 8px;
+  }
+  h1 strong { font-weight: 600; color: var(--green); font-style: italic; }
+
+  .tagline {
+    font-size: 15px; font-weight: 600; color: var(--text2);
+    font-style: italic; margin: 12px auto 0; max-width: 480px;
+    animation: fadeUp .5s .05s ease both;
+  }
+  .tagline strong { color: var(--green); font-style: normal; }
+
+  /* CONCEPT BOX */
+  .concept-box {
+    margin: 24px auto 0; max-width: 680px;
+    background: var(--white); border: 1.5px solid var(--border);
+    border-radius: 16px; padding: 18px 24px 14px;
+    box-shadow: 0 2px 16px var(--shadow);
+    animation: fadeUp .5s .08s ease both;
+  }
+  .concept-row {
+    display: grid; grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: center; gap: 8px; margin-bottom: 14px;
+  }
+  .concept-step {
+    font-size: 12.5px; font-weight: 500; color: var(--text2);
+    line-height: 1.5; text-align: center;
+    padding: 8px 6px; background: var(--cream); border-radius: 10px;
+  }
+  .concept-step strong { color: var(--text); font-weight: 700; }
+  .concept-arrow { color: var(--green); font-size: 18px; font-weight: 700; text-align: center; }
+  .concept-sub {
+    font-size: 12.5px; font-weight: 500; color: var(--muted);
+    border-top: 1px solid var(--border); padding-top: 12px; text-align: center; margin: 0;
+  }
+  .concept-sub em { color: var(--green); font-style: normal; font-weight: 700; }
+
+  /* NIVEAUX */
+  .levels-section { max-width: 900px; margin: 0 auto; padding: 56px 32px 0; animation: fadeUp .5s .12s ease both; }
+  .section-label { font-size: 11px; font-weight: 800; letter-spacing: 1.8px; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; display: block; }
+
+  .levels-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+  .level-card {
+    background: var(--white); border: 1.5px solid var(--border);
+    border-radius: 20px; padding: 28px 24px;
+    text-decoration: none; color: var(--text);
+    display: flex; flex-direction: column; gap: 10px;
+    box-shadow: 0 2px 10px var(--shadow);
+    transition: all .2s;
+  }
+  .level-card:hover { border-color: var(--green); box-shadow: 0 8px 28px rgba(61,122,85,.14); transform: translateY(-3px); }
+
+  .level-tag { display: inline-flex; align-items: center; justify-content: center;
+    width: 52px; height: 52px; border-radius: 14px;
+    font-family: 'Fraunces', serif; font-weight: 600; font-size: 22px;
+    background: var(--green-light); color: var(--green);
+  }
+  .level-name { font-family: 'Fraunces', serif; font-weight: 600; font-size: 22px; color: var(--text); }
+  .level-desc { font-size: 13px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+  .level-count { font-size: 12px; font-weight: 700; color: var(--green); margin-top: 4px; }
+
+  .level-arrow { align-self: flex-end; font-size: 18px; color: var(--green-mid); transition: transform .2s; }
+  .level-card:hover .level-arrow { transform: translateX(4px); color: var(--green); }
+
+  /* START SECTION */
+  .start-section {
+    background: var(--white); border-top: 1.5px solid var(--border); border-bottom: 1.5px solid var(--border);
+    padding: 48px 32px; margin-top: 64px;
+  }
+  .start-inner { max-width: 820px; margin: 0 auto; text-align: center; }
+  .start-label { font-size: 11px; font-weight: 800; letter-spacing: 1.8px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; display: block; }
+  .start-title { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 600; color: var(--text); letter-spacing: -0.5px; margin-bottom: 24px; }
+  .start-cards { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .start-card {
+    background: var(--cream); border: 1.5px solid var(--border); border-radius: 16px;
+    padding: 22px 20px; width: 220px; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    transition: all .2s; text-align: center;
+  }
+  .start-card:hover { border-color: var(--green); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(61,122,85,.12); }
+  .start-card.active { border-color: var(--green); background: var(--green-soft); }
+  .start-icon { font-size: 28px; }
+  .start-card-title { font-weight: 700; font-size: 13px; color: var(--text); line-height: 1.4; }
+  .start-card-sub { font-size: 11px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+  .start-tip {
+    margin-top: 20px; padding: 16px 20px;
+    background: var(--green-soft); border: 1.5px solid var(--green-mid); border-radius: 12px;
+    font-size: 14px; font-weight: 600; color: var(--text2); display: none;
+    max-width: 560px; margin-left: auto; margin-right: auto; text-align: left;
+  }
+  .start-tip.show { display: block; }
+  .start-tip em { color: var(--green); font-style: normal; font-weight: 700; }
+
+  /* PARENTS */
+  .parents-section { background: #ede8e0; border-top: 1.5px solid var(--border); padding: 56px 32px; }
+  .parents-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .parents-label { font-size: 11px; font-weight: 800; letter-spacing: 1.8px; text-transform: uppercase; color: var(--green); margin-bottom: 12px; display: block; }
+  .parents-text h2 { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 600; color: var(--text); letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 16px; }
+  .parents-text h2 em { font-style: italic; color: var(--green); }
+  .parents-text p { font-size: 14px; font-weight: 500; color: var(--text2); line-height: 1.7; margin-bottom: 10px; }
+  .parents-cards { display: flex; flex-direction: column; gap: 12px; }
+  .parents-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 14px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 12px; box-shadow: 0 2px 8px var(--shadow); }
+  .parents-card-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .parents-card-title { font-weight: 700; font-size: 13px; color: var(--text); margin-bottom: 2px; }
+  .parents-card-text { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+
+  @media (max-width: 700px) {
+    .levels-grid { grid-template-columns: 1fr; }
+    .parents-inner { grid-template-columns: 1fr; gap: 32px; }
+    .hero { padding: 52px 20px 36px; }
+    .levels-section { padding: 40px 20px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html"><em>C'est</em> CARRÉ²</a>
+  <nav class="header-nav">
+    <a class="nav-level" href="6e/index.html">6e</a>
+    <a class="nav-level" href="5e/index.html">5e</a>
+    <a class="nav-level" href="4e/index.html">4e</a>
+    <a class="nav-level" href="3e/index.html">3e</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <span class="hero-eyebrow">Maths · 6e → 3e · 100% gratuit</span>
+  <h1>T'as pas compris ?<br><strong>T'es au bon endroit.</strong></h1>
+  <p class="tagline">Fini de chercher pendant 20 minutes pour rien. <strong>Clique, bosse, passe à autre chose.</strong></p>
+
+  <div class="concept-box">
+    <div class="concept-row">
+      <span class="concept-step">Ce site ne crée pas de cours.</span>
+      <span class="concept-arrow">→</span>
+      <span class="concept-step">Il sélectionne les <strong>meilleures ressources déjà en ligne.</strong></span>
+      <span class="concept-arrow">→</span>
+      <span class="concept-step">Et les classe par <strong>niveau</strong> et <strong>chapitre</strong> pour toi.</span>
+    </div>
+    <p class="concept-sub">Vidéos, cours PDF, exercices corrigés — triés, rangés, prêts. <em>Gratuit. Sans inscription.</em></p>
+  </div>
+</section>
+
+<div class="levels-section">
+  <span class="section-label">Choisir ton niveau</span>
+  <div class="levels-grid">
+    <a class="level-card" href="6e/index.html">
+      <div class="level-tag">6e</div>
+      <div class="level-name">Sixième</div>
+      <div class="level-desc">Nombres, fractions, géométrie, proportionnalité — les bases du collège.</div>
+      <div class="level-count">10 chapitres · 30+ ressources</div>
+      <span class="level-arrow">→</span>
+    </a>
+    <a class="level-card" href="5e/index.html">
+      <div class="level-tag">5e</div>
+      <div class="level-name">Cinquième</div>
+      <div class="level-desc">Relatifs, fractions, Pythagore, calcul littéral — on monte en puissance.</div>
+      <div class="level-count">8 chapitres · 25+ ressources</div>
+      <span class="level-arrow">→</span>
+    </a>
+    <a class="level-card" href="4e/index.html">
+      <div class="level-tag">4e</div>
+      <div class="level-name">Quatrième</div>
+      <div class="level-desc">Puissances, équations, Thalès, trigonométrie — les chapitres clés.</div>
+      <div class="level-count">8 chapitres · 28+ ressources</div>
+      <span class="level-arrow">→</span>
+    </a>
+    <a class="level-card" href="3e/index.html">
+      <div class="level-tag">3e</div>
+      <div class="level-name">Troisième</div>
+      <div class="level-desc">Identités remarquables, fonctions, brevet — la ligne droite.</div>
+      <div class="level-count">9 chapitres · 30+ ressources</div>
+      <span class="level-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<section class="start-section">
+  <div class="start-inner">
+    <span class="start-label">Tu sais pas par où commencer ?</span>
+    <h2 class="start-title">Choisis ta situation</h2>
+    <div class="start-cards">
+      <div class="start-card" onclick="startGuide('controle', event)">
+        <span class="start-icon">📝</span>
+        <span class="start-card-title">J'ai un contrôle bientôt</span>
+        <span class="start-card-sub">Aller directement aux exercices du chapitre concerné</span>
+      </div>
+      <div class="start-card" onclick="startGuide('perdu', event)">
+        <span class="start-icon">😵</span>
+        <span class="start-card-title">Je suis complètement perdu</span>
+        <span class="start-card-sub">Reprendre les bases depuis le début de ton niveau</span>
+      </div>
+      <div class="start-card" onclick="startGuide('avance', event)">
+        <span class="start-icon">📈</span>
+        <span class="start-card-title">Je veux progresser</span>
+        <span class="start-card-sub">Aller chapitre par chapitre, dans l'ordre du programme</span>
+      </div>
+    </div>
+    <div class="start-tip" id="startTip"></div>
+  </div>
+</section>
+
+<section class="parents-section">
+  <div class="parents-inner">
+    <div class="parents-text">
+      <span class="parents-label">Pour les parents</span>
+      <h2>Votre enfant bloque<br>sur un cours ?<br><em>Voici quoi faire.</em></h2>
+      <p>Pas besoin de vous souvenir de vos cours de collège. Ce site vous donne exactement ce qu'il faut, au bon endroit, en 3 clics.</p>
+      <div style="margin-top:16px; display:flex; flex-direction:column; gap:8px;">
+        <div style="display:flex; align-items:center; gap:10px; font-size:13px; font-weight:600; color:var(--text2);">
+          <span style="background:var(--green);color:white;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;">1</span>
+          Choisissez le niveau de votre enfant ci-dessus
+        </div>
+        <div style="display:flex; align-items:center; gap:10px; font-size:13px; font-weight:600; color:var(--text2);">
+          <span style="background:var(--green);color:white;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;">2</span>
+          Cliquez sur le chapitre qu'il n'a pas compris
+        </div>
+        <div style="display:flex; align-items:center; gap:10px; font-size:13px; font-weight:600; color:var(--text2);">
+          <span style="background:var(--green);color:white;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;">3</span>
+          Lancez la vidéo — elle explique à votre place
+        </div>
+      </div>
+    </div>
+    <div class="parents-cards">
+      <div class="parents-card"><span class="parents-card-icon">🎬</span><div><div class="parents-card-title">Des vidéos qui expliquent le cours</div><div class="parents-card-text">Courtes, claires, faites par des profs. Vous pouvez regarder avec votre enfant sans rien connaître au chapitre.</div></div></div>
+      <div class="parents-card"><span class="parents-card-icon">✏️</span><div><div class="parents-card-title">Des exercices avec leur corrigé</div><div class="parents-card-text">Votre enfant s'entraîne, vous vérifiez les réponses grâce au corrigé.</div></div></div>
+      <div class="parents-card"><span class="parents-card-icon">📄</span><div><div class="parents-card-title">Le cours en PDF à imprimer</div><div class="parents-card-text">Un résumé du chapitre à poser à côté des devoirs.</div></div></div>
+      <div class="parents-card"><span class="parents-card-icon">💚</span><div><div class="parents-card-title">Gratuit, sans inscription, sans pub</div><div class="parents-card-text">Aucun abonnement, aucun compte à créer.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo"><em>C'est</em> CARRÉ²</span>
+  <nav style="display:flex;gap:20px;"><a href="#">Mentions légales</a><a href="#">Contact</a></nav>
+</footer>
+
+<script>
+const tips = {
+  controle: "👉 Sélectionne ton niveau, trouve le chapitre concerné, et commence directement par les <em>exercices</em>. Si tu bloques, regarde le cours ou la vidéo juste avant.",
+  perdu:    "👉 Commence par le <em>premier chapitre de ton niveau</em>. Regarde le cours en vidéo, fais les exercices. Inutile d'aller vite — mieux vaut comprendre un truc à la fois.",
+  avance:   "👉 Passe les chapitres dans l'ordre : <em>cours → exercices → corrigé</em>. Si tu comprends du premier coup, passe au suivant. Sinon, regarde la vidéo.",
+};
+function startGuide(type, e) {
+  document.querySelectorAll(".start-card").forEach(c => c.classList.remove("active"));
+  e.currentTarget.classList.add("active");
+  const tip = document.getElementById("startTip");
+  tip.innerHTML = tips[type];
+  tip.classList.add("show");
+}
+</script>
+</body>
+</html>
